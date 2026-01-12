@@ -1,69 +1,74 @@
----
-layout: default
-title: "Home"
-nav_order: 1
----
-
-# Pocket Flow
-
-A [100-line](https://github.com/the-pocket/PocketFlow/blob/main/pocketflow/__init__.py) minimalist LLM framework for *Agents, Task Decomposition, RAG, etc*.
-
-- **Lightweight**: Just the core graph abstraction in 100 lines. ZERO dependencies, and vendor lock-in.
-- **Expressive**: Everything you love from larger frameworks—([Multi-](./design_pattern/multi_agent.html))[Agents](./design_pattern/agent.html), [Workflow](./design_pattern/workflow.html), [RAG](./design_pattern/rag.html), and more.  
-- **Agentic-Coding**: Intuitive enough for AI agents to help humans build complex LLM applications.
-
 <div align="center">
-  <img src="https://github.com/the-pocket/.github/raw/main/assets/meme.jpg?raw=true" alt="Pocket Flow – 100-line minimalist LLM framework" width="400"/>
+  <h1>EasyFlow - WIP</h1>
+  <p><strong>Quality-of-life utilities for <a href="https://github.com/The-Pocket/PocketFlow">PocketFlow</a></strong></p>
 </div>
 
+<br>
 
-## Core Abstraction
+EasyFlow extends [PocketFlow](https://github.com/The-Pocket/PocketFlow)—the 100-line minimalist LLM framework—with optional utilities that address common pain points while preserving the simplistic philosophy.
 
-We model the LLM workflow as a **Graph + Shared Store**:
+## What's Included
 
-- [Node](./core_abstraction/node.md) handles simple (LLM) tasks.
-- [Flow](./core_abstraction/flow.md) connects nodes through **Actions** (labeled edges).
-- [Shared Store](./core_abstraction/communication.md) enables communication between nodes within flows.
-- [Batch](./core_abstraction/batch.md) nodes/flows allow for data-intensive tasks.
-- [Async](./core_abstraction/async.md) nodes/flows allow waiting for asynchronous tasks.
-- [(Advanced) Parallel](./core_abstraction/parallel.md) nodes/flows handle I/O-bound tasks.
+### LLM Provider Router
 
-<div align="center">
-  <img src="https://github.com/the-pocket/.github/raw/main/assets/abstraction.png" alt="Pocket Flow – Core Abstraction" width="700"/>
-</div>
+One function per provider. All models. No conditionals in your nodes.
 
-## Design Pattern
+```python
+from easyflow.utils import register_llm, call_llm
 
-From there, it’s easy to implement popular design patterns:
+# Register once per provider
+def openai_call(prompt, model, **kwargs):
+    client = OpenAI()
+    r = client.chat.completions.create(
+        model=model or "gpt-4o",
+        messages=[{"role": "user", "content": prompt}],
+        **kwargs
+    )
+    return r.choices[0].message.content
 
-- [Agent](./design_pattern/agent.md) autonomously makes decisions.
-- [Workflow](./design_pattern/workflow.md) chains multiple tasks into pipelines.
-- [RAG](./design_pattern/rag.md) integrates data retrieval with generation.
-- [Map Reduce](./design_pattern/mapreduce.md) splits data tasks into Map and Reduce steps.
-- [Structured Output](./design_pattern/structure.md) formats outputs consistently.
-- [(Advanced) Multi-Agents](./design_pattern/multi_agent.md) coordinate multiple agents.
+register_llm("openai", openai_call)
+register_llm("anthropic", anthropic_call)
 
-<div align="center">
-  <img src="https://github.com/the-pocket/.github/raw/main/assets/design.png" alt="Pocket Flow – Design Pattern" width="700"/>
-</div>
+# Use any model with a clean API
+call_llm("Hello!", "openai/gpt-4o")
+call_llm("Hello!", "openai/gpt-4o-mini")
+call_llm("Hello!", "anthropic/claude-sonnet-4-0")
+```
 
-## Utility Function
+### Embedding Provider Router
 
-We **do not** provide built-in utilities. Instead, we offer *examples*—please *implement your own*:
+Same pattern for embeddings:
 
-- [LLM Wrapper](./utility_function/llm.md)
-- [Viz and Debug](./utility_function/viz.md)
-- [Web Search](./utility_function/websearch.md)
-- [Chunking](./utility_function/chunking.md)
-- [Embedding](./utility_function/embedding.md)
-- [Vector Databases](./utility_function/vector.md)
-- [Text-to-Speech](./utility_function/text_to_speech.md)
+```python
+from easyflow.utils import register_embedding, embed
 
-**Why not built-in?**: I believe it's a *bad practice* for vendor-specific APIs in a general framework:
-- *API Volatility*: Frequent changes lead to heavy maintenance for hardcoded APIs.
-- *Flexibility*: You may want to switch vendors, use fine-tuned models, or run them locally.
-- *Optimizations*: Prompt caching, batching, and streaming are easier without vendor lock-in.
+register_embedding("openai", openai_embed)
 
-## Ready to build your Apps? 
+embed("Hello world", "openai/text-embedding-3-small")
+embed("Hello world", "openai/text-embedding-3-large")
+```
 
-Check out [Agentic Coding Guidance](./guide.md), the fastest way to develop LLM projects with Pocket Flow!
+## Learn PocketFlow
+
+EasyFlow is built on PocketFlow. For core concepts—Nodes, Flows, Agents, RAG, etc.—see:
+
+- 📖 [PocketFlow Documentation](https://the-pocket.github.io/PocketFlow/)
+- 🎥 [Video Tutorial](https://youtu.be/0Zr3NwcvpA0)
+- 💬 [Discord Community](https://discord.gg/hUHHE9Sa6T)
+- 📦 [PocketFlow GitHub](https://github.com/The-Pocket/PocketFlow)
+
+## Philosophy
+
+PocketFlow is intentionally minimal—100 lines, zero dependencies, zero vendor lock-in.
+
+EasyFlow shares that philosophy. We add utilities only when they:
+
+- Eliminate repetitive boilerplate
+- Stay dependency-free
+- Remain optional (use what you need, ignore the rest)
+
+The utilities here are things we found ourselves writing over and over. Now you don't have to.
+
+## License
+
+MIT

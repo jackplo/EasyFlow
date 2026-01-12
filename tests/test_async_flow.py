@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from pocketflow import Node, AsyncNode, AsyncFlow
+from easyflow import Node, AsyncNode, AsyncFlow
 
 class AsyncNumberNode(AsyncNode):
     """

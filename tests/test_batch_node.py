@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from pocketflow import Node, BatchNode, Flow
+from easyflow import Node, BatchNode, Flow
 
 class ArrayChunkNode(BatchNode):
     def __init__(self, chunk_size=10):

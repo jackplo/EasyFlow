@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from pocketflow import AsyncNode, AsyncParallelBatchNode, AsyncParallelBatchFlow
+from easyflow import AsyncNode, AsyncParallelBatchNode, AsyncParallelBatchFlow
 
 class AsyncParallelNumberProcessor(AsyncParallelBatchNode):
     def __init__(self, delay=0.1):

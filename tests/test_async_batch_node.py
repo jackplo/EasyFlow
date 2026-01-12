@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from pocketflow import AsyncNode, AsyncBatchNode, AsyncFlow
+from easyflow import AsyncNode, AsyncBatchNode, AsyncFlow
 
 class AsyncArrayChunkNode(AsyncBatchNode):
     def __init__(self, chunk_size=10):

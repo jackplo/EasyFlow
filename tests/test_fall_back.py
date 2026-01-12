@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from pocketflow import Node, AsyncNode, Flow, AsyncFlow
+from easyflow import Node, AsyncNode, Flow, AsyncFlow
 
 class FallbackNode(Node):
     def __init__(self, should_fail=True, max_retries=1):

@@ -14,7 +14,7 @@ EasyFlow extends [PocketFlow](https://github.com/The-Pocket/PocketFlow)—the 10
 One function per provider. All models. No conditionals in your nodes.
 
 ```python
-from pocketflow.utils import register_llm, call_llm
+from easyflow.utils import register_llm, call_llm
 
 # Register once per provider
 def openai_call(prompt, model, **kwargs):
@@ -40,7 +40,7 @@ call_llm("Hello!", "anthropic/claude-sonnet-4-0")
 Same pattern for embeddings:
 
 ```python
-from pocketflow.utils import register_embedding, embed
+from easyflow.utils import register_embedding, embed
 
 register_embedding("openai", openai_embed)
 

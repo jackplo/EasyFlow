@@ -5,7 +5,7 @@ from pathlib import Path
 import warnings
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from pocketflow import Node, Flow
+from easyflow import Node, Flow
 
 # --- Node Definitions ---
 # Nodes intended for default transitions (>>) should NOT return a specific

@@ -5,7 +5,7 @@ import threading
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from pocketflow.utils import llm
+from easyflow.utils import llm
 
 
 def create_mock_provider(name):

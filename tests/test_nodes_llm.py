@@ -4,8 +4,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from pocketflow.utils import llm as llm_module
-from pocketflow.nodes import LLMNode
+from easyflow.utils import llm as llm_module
+from easyflow.nodes import LLMNode
 
 
 def create_mock_llm(name):

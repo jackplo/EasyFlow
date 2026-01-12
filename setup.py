@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="pocketflow",
-    version="0.0.3",
+    name="EasyFlow",
+    version="0.0.1",
     packages=find_packages(),
-    author="Zachary Huang",
-    author_email="zh2408@columbia.edu",
-    description="Pocket Flow: 100-line LLM framework. Let Agents build Agents!",
-    url="https://github.com/The-Pocket/PocketFlow",
+    author="Jack Lohse",
+    author_email="jacklohse@ufl.edu",
+    description="A friendlier adaptation of Pocket Flow",
+    url="https://github.com/jackplo/EasyFlow",
 )
